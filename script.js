@@ -18,6 +18,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+ // Función para actualizar la imagen de la cámara
+function updateCameraFeed() {
+  const imageRef = ref(database, "/camera/image");
+  onValue(imageRef, (snapshot) => {
+    const imageData = snapshot.val();
+    if (imageData) {
+      const imgElement = document.getElementById("camera-stream");
+      if (imgElement) {
+        imgElement.src = `data:image/jpeg;base64,${imageData}`;
+      }
+    }
+  });
+}
 // Función para actualizar la interfaz de las variables generales
 function updateGeneralUI(data) {
   if (data) {
@@ -56,6 +69,18 @@ function setupFirebaseListeners() {
       }
     }
   });
+  updateCameraFeed();
+}
+
+ // Función para mostrar la cámara
+ function toggleCamera() {
+  const cameraSection = document.getElementById("camera-section");
+  if (cameraSection.style.display === "none") {
+    cameraSection.style.display = "block";  // Mostrar la cámara
+    updateCameraFeed();  // Iniciar la actualización de la cámara
+  } else {
+    cameraSection.style.display = "none";  // Ocultar la cámara
+  }
 }
 
 // Alternar el estado de un LED específico
@@ -145,3 +170,4 @@ function init() {
 }
 
 init();
+ 
