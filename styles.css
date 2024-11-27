@@ -64,4 +64,15 @@ body {
   .led-controls button {
     width: 150px;
   }
-  
+  img {
+    margin-top: 20px;
+    max-width: 100%;
+    width: 640px;
+    border: 2px solid #0078d7;
+    border-radius: 10px;
+  }
+  #camera-stream {
+    transform: rotate(180deg);  /* Gira la imagen 90 grados en sentido horario */
+    width: 70vh;  /* Hace que el ancho sea igual a la altura de la pantalla (para rotar adecuadamente) */
+    height: 15vw;  /* Hace que la altura sea igual al ancho de la pantalla (para rotar adecuadamente) */
+  }
